@@ -1,0 +1,15 @@
+[Unit]
+Description=zines
+After=network.target
+
+[Service]
+User=syncy
+Group=syncy
+Type=simple
+Restart=always
+RestartSec=5s
+WorkingDirectory=/srv/zines/zines
+ExecStart=/srv/zines/zines
+
+[Install]
+WantedBy=multi-user.target

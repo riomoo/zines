@@ -1,0 +1,136 @@
+@font-face {
+  font-family: "fixedsys_excelsior_3.01Rg";
+  src: url('fsex300-webfont.woff2') format('woff2'),
+       url('fsex300-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  -webkit-font-smoothing: none;
+  font-smooth: never;
+  font-kerning: none;
+}
+
+@font-face {
+  font-family: "topaz_a600a1200a400regular";
+  src: url("topaz_a1200_v1.0-webfont.woff2") format("woff2"),
+       url("topaz_a1200_v1.0-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  -webkit-font-smoothing: none;
+  font-smooth: never;
+  font-kerning: none;
+}
+
+:root {
+  /* initial colors */
+  --bg: #000000;
+  --fg: #aaaaaa;
+  --font-size: 16px;
+  --line-height: 15px;
+  --font: "fixedsys_excelsior_3.01Rg";
+  /* --line-height: 16px;
+  --font: "topaz_a600a1200a400regular"; */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scrollbar-color: var(--fg) var(--bg);
+  scrollbar-width: auto;
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+}
+
+::-webkit-scrollbar {width: auto;}
+::-webkit-scrollbar-thumb {background: var(--fg);}
+::-webkit-scrollbar-track {background: var(--bg);}
+::-webkit-scrollbar-corner {background: var(--bg);}
+
+::selection {
+  color: var(--bg);
+  background-color: var(--fg);
+}
+
+body {
+  font-family: var(--font), monospace;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+pre {
+  font-family: var(--font), monospace;
+  padding-left: 2ch;
+  padding-right: 2ch;
+  width: 80ch;
+}
+
+pre:first-of-type {
+  margin-top: calc(var(--line-height)*3);
+}
+
+.top-bar {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(var(--line-height)*3);
+  overflow-y: hidden;
+  background: var(--bg);
+  color: var(--fg);
+  text-transform: uppercase;
+}
+
+.top-bar a {
+  text-decoration: none;
+  color: var(--fg);
+  padding: var(--line-height) 1ch;
+  border: 0;
+  display: inline-block;
+  background-clip: content-box;
+}
+
+.top-bar > ul li:first-child a {
+  padding-left: 2ch;
+}
+
+.top-bar a:hover {
+  cursor: pointer;
+  background-color: var(--fg);
+  color: var(--bg);
+  background-clip: content-box;
+}
+
+.top-bar ul {
+  list-style: none;
+  display: inline;
+  font-size: 0;
+}
+
+.top-bar ul li {
+  display: inline;
+  font-size: 1rem;
+}
+
+@media print {
+  .top-bar {
+    display: none;
+  }
+  * {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  pre.art {
+    page-break-inside: avoid;
+  }
+  pre.break-after {
+    page-break-after: always;
+  }
+}

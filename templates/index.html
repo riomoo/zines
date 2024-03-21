@@ -1,0 +1,235 @@
+<!doctype html>
+
+<html lang="en-US">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="FFMPEG zine." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="/assets/ffmpeg.html" />
+    <meta property="og:description" content="ffmpeg zine." />
+    <meta property="og:url" content="/templates/index.html" />
+    <meta property="og:image" content="/assets/card.png" />
+    <meta property="og:image:width" content="240" />
+    <meta property="og:image:height" content="240" />
+
+    <link rel="stylesheet" href="/assets/main.css" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+    <link rel="icon" href="/assets/favicon.ico" sizes="16x16 32x32 48x48 64x64" type="image/vnd.microsoft.icon" />
+
+    <title>FFMPEG.TXT</title>
+  </head>
+
+  <body>
+
+    <div class="top-bar">
+      <ul>
+        <li><a href="/">ffmpeg</a></li>
+        <li><a onclick="swapColors()">swap:fg/bg</a></li>
+        <li><a onclick="swapFonts()">swap:font</a></li>
+        <li><a href="/assets/FFMPEG_TUT_1.TXT" download>download:dos/win</a></li>
+        <li><a href="/assets/ffmpeg-tut.txt" download>download:unix</a></li>
+        <li><a onclick="window.print()">print</a></li>
+      </ul>
+    </div>
+
+    <script>
+      var lightMode = false;
+      var fixedSys = true;
+
+      let root = document.documentElement;
+
+      // if (location.hash === "#light") {
+      //   swapColors();
+      // }
+
+      function swapColors() {
+        if (lightMode) {
+          root.style.setProperty("--fg", "#aaaaaa");
+          root.style.setProperty("--bg", "#000000");
+          // location.hash = "dark";
+          lightMode = false;
+        } else {
+          root.style.setProperty("--fg", "#000000");
+          root.style.setProperty("--bg", "#aaaaaa");
+          // location.hash = "light";
+          lightMode = true;
+        }
+      }
+
+      function swapFonts() {
+        if (fixedSys) {
+          root.style.setProperty("--font", "'topaz_a600a1200a400regular'");
+          root.style.setProperty("--line-height", "16px");
+          fixedSys = false;
+        } else {
+          root.style.setProperty("--font", "'fixedsys_excelsior_3.01Rg'");
+          root.style.setProperty("--line-height", "15px");
+          fixedSys = true;
+        }
+      }
+    </script>
+
+    <pre class="art">
+              /============================================\
+              || ____|  ____|   \  |   _ \   ____|   ___| ||
+              || |      |      |\/ |  |   |  __|    |     ||
+              || __|    __|    |   |  ___/   |      |   | ||
+              ||_|     _|     _|  _| _|     _____| \____| ||
+              \============================================/      
+  mar 2024                                                      by Nobodyatall
+
+\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /
+ \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/
+
+</pre><pre class="art">
+ ___ _   _ _____ ____   ___
+|_ _| \ | |_   _|  _ \ / _ \
+ | ||  \| | | | | |_) | | | |
+ | || |\  | | | |  _ <| |_| |
+|___|_| \_| |_| |_| \_\\___/
+</pre><pre>
+
+  greetings and bienvenue,
+  to my zine
+
+  a lot of people on certain Internet forums and chat areas ask me how I fit
+  certain high quality videos in such small yet high quality constraints.
+  this is purely using ffmpeg and ab-av1.
+
+  I'll be showing you exactly how to use these programs to achieve better file
+  sizes while also maintaining visual quality as best as possible.
+
+</pre><pre class="art">
+ /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\
+/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \
+</pre><pre>
+
+  before we talk about ffmpeg or ab-av1 we need to discuss VMAF. VMAF being the
+  visual quality of a video in relation to our eyes. the scale reaches from
+  0-100 after 93 our eyes can't fully tell the difference between the quality
+  of the original or the new version.
+
+  I try to to keep vmaf at 94-95 for 1080p videos and higher but normally no 
+  lower than 88 for 720p videos. you can still use 95 for 720p and get an amazing 
+  result with a small file size and great quality.
+
+</pre><pre class="art">
+ /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\
+/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \
+</pre><pre>
+  
+  Now ab-av1, what is it? It's an application to easily use ffmpeg to both
+  calculate VMAF and encode using optimal settings. How do you get it?
+  there's a github with a windows binaryand you can install it with your
+  linux package managers.
+
+  sudo pacman -Sy ab-av1
+  sudo apt-get install ab-av1
+  or just clone it and build it via the guide.
+  make sure you have ffmpeg installed as well.
+
+</pre><pre class="art">
+ /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\
+/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \
+</pre><pre>
+
+  lets use ab-av1.
+
+  I have a very highly lossless animated video.
+  name: bdan.mp4
+  video: h264 high 1080p 24fps 14989kb/s
+  audio: aac 317kb/s
+  size: 858mb
+  length: 8 min
+  
+  see I want to send bdan.mp4 to a friend but its just too damn big! I want it
+  smaller than 25mb.
+
+  this is the command we'll run just to see if we can do it with 1080p:
+
+  ab-av1 crf-search --encoder libx264 --min-vmaf 95 --pix-format yuv420p \
+  -i bdan.mp4
+
+  after running this it says I can get a file size of 236.94mb using 
+  --crf 19.7! but that's not what I'm after. I want 25mb or less.
+  
+  lets add --vmaf-scale="1280x720" --vfilter "scale=-1:720" to the previous
+  ab-av1 command.
+
+  111.62mb with 95 VMAF. Very good. lets change the --min-vmaf to 88
+
+  we got crf 28.4 VMAF 88 31.37mb. SO CLOSE. remember what I said about not
+  normally going below 88? this is one of those cases. --min-vmaf 84.
+
+  now we have crf 31.2 VMAF 84 and 23.46mb. almost perfect. except thats just the
+  video stream. the audio stream is 18mb alone. but we can reduce that to about
+  4mb using ffmpeg. (we'll do that in a bit) but lets make room for that audio.
+
+  --vmaf-min 81
+  
+  finally 32.8 VMAF 81 at 20.00mb we are ready for ffmpeg.
+</pre><pre class="art">
+
+ /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\
+/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \
+
+</pre><pre>
+  ffmpeg is a beautiful thing. its robust, its got codecs, and its fast.
+  lets use ffmpeg to make that audio about 4mb in size.
+
+  ffmpeg -y -i bdan.mp4 -c:a aac -b:a 64k -vn output.m4a
+
+  3.9mb close enough! audio is kind of trial and error but it should be quick.
+
+  Now we can convert just the video. not the audio we can stich them back
+  together once we finish the video.
+
+  ffmpeg -y -i bdan.mp4 -c:v libx264 \
+  -profile:v high -level:v 4.2 -crf 32.8 -pix_fmt yuv420p -keyint_min 72 \
+  -g 72 -s 1280x720 -movflags +faststart -preset veryslow -an output.mp4
+
+  so there's not TOO much to explain here. -s scales, -movflags +faststart
+  allows for streaming the mp4 file, -preset veryslow for quality and 
+  compression, -an for no audio. Finally -keyint_min and -g, which should be
+  calculated thusly. how many seconds before an I-Frame. 1? 2? 3? 10?
+
+  this is easy. this is an 8 minute video at 24fps for 2 seconds per I-Frame
+
+  2 * 24 = 48. so -keyint_min 48 -g 48 would be the command.
+
+  i chose 3. 3 * 24 = 72 -keyint_min 72 -g 72. easy. the larger the seconds
+  the smaller the video but the worse it could look.
+
+  the video file output.mp4 is 19.6mb and the audio file output.m4a is 3.9mb
+</pre><pre class="art">
+
+ /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\
+/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \
+
+</pre><pre>
+  Lets combine the video and audio.
+  ffmpeg -i output.mp4 -i output.m4a -c copy -movflags +faststart output-va.mp4
+
+  name: output-va.mp4
+  video: h264 high 720p 24fps 340kb/s
+  audio: aac 66kb/s
+  size: 23.6mb
+  length: 8 min
+
+  so as you can see even when the video in question is almost 1gb we can still
+  create a more than watchable experience and shareable with friends, enemies,
+  and other weirdos on the Internet. 
+
+  ~Nobodyatall
+
+</pre><pre class="art">
+ /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\  /\
+//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
+//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
+/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \/  \
+    </pre>
+  </body>
+</html>
